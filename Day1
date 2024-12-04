@@ -4,14 +4,41 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-
 public class Day1 {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(new File("pathToYourFile"));
-        List<Double> doubles = new ArrayList<Double>();
-        while(scanner.hasNextDouble()){
-            doubles.add(scanner.nextDouble());
+
+        ArrayList<String> Column1 = getFileData("C:\\Users\\BT_4N2_33\\Documents\\column1.txt");
+        ArrayList<String> Column2 = getFileData("C:\\Users\\BT_4N2_33\\Documents\\column2.txt");
+
+        Collections.sort(Column1);
+        Collections.sort(Column2);
+
+        int tot = 0;
+
+        for (int i = 0; i< Column1.size(); i++) {
+            int dig1 = Integer.parseInt(Column1.get(i));
+            int dig2 = Integer.parseInt(Column2.get(i));
+            int result = Math.abs(dig1 - dig2);
+            tot = tot + result;
         }
-        Collections.sort(doubles);
+        System.out.println(tot);
+    }
+
+
+    public static ArrayList<String> getFileData(String fileName) {
+        ArrayList<String> fileData = new ArrayList<String>();
+        try {
+            File f = new File(fileName);
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                if (!line.equals(""))
+                    fileData.add(line);
+            }
+            return fileData;
+        }
+        catch (FileNotFoundException e) {
+            return fileData;
+        }
     }
 }
