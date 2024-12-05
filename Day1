@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -14,15 +15,33 @@ public class Day1 {
         Collections.sort(Column2);
 
         int tot = 0;
+        int match = 0;
+        int numScore = 0;
+        int totScore = 0;
+
+        ArrayList<Integer> list1 = new ArrayList<Integer>();
+        ArrayList<Integer> list2 = new ArrayList<Integer>();
 
         for (int i = 0; i< Column1.size(); i++) {
             int dig1 = Integer.parseInt(Column1.get(i));
+            list1.add(dig1);
             int dig2 = Integer.parseInt(Column2.get(i));
+            list2.add(dig2);
             int result = Math.abs(dig1 - dig2);
             tot = tot + result;
         }
         System.out.println(tot);
+
+        for (int i = 0;  i< list1.size(); i++) {
+            match = Collections.frequency(list2, list1.get(i));
+            numScore = list1.get(i) * match;
+            totScore = totScore + numScore;
+
+        }
+        System.out.println(totScore);
     }
+
+
 
 
     public static ArrayList<String> getFileData(String fileName) {
