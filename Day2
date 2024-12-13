@@ -22,18 +22,22 @@ public class Day2 {
 
         boolean executed = true;
         int safe = 0;
-
+        executed = false;
+        System.out.println("Unsafe");
+        break;
         for (ArrayList<Integer> list : lists) {
             for (int i = 1; i< list.size(); i++ ) {
-                if((Math.abs(list.get(i) - list.get(i-1)) > 3 || Math.abs(list.get(i) - list.get(i-1)) == 0) && ((list.get(0) <= list.get(1) && list.get(i - 2) <= list.get(i - 1)) || ((list.get(0) >= list.get(1) && list.get(i - 2) >= list.get(i - 1)) ))) {
-                    executed = false;
-                    break;
+                if(((Math.abs(list.get(i) - list.get(i-1)) > 3 || (Math.abs(list.get(i) - list.get(i-1)) == 0)) ||
+                        ((list.get(0) < list.get(1) && list.get(i - 2) < list.get(i - 1)) ))) {
+                    
                 }
+                
             }
-        if (executed){
-            safe += 1;
-        }
-        executed = true;
+            if (executed){
+                safe += 1;
+                System.out.println("safe");
+            }
+            executed = true;
         }
         System.out.println("Safe Lists:" + safe);
     }
